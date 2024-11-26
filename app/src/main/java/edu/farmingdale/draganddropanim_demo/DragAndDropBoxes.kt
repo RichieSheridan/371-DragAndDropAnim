@@ -56,6 +56,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -142,14 +143,17 @@ fun DragAndDropBoxes(modifier: Modifier = Modifier) {
         }
 
         Box(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
+            val configuration = LocalConfiguration.current
+            val screenWidth = configuration.screenWidthDp
+            val screenHeight = configuration.screenHeightDp
+
             Button(
                 onClick = {
-                    offsetX = 0f
-                    offsetY = 0f
+                    offsetX = (screenWidth*1.2).toFloat()
+                    offsetY = (screenHeight*0.8).toFloat()
                 },
                 modifier = Modifier.padding(0.5.dp)
             ) {
