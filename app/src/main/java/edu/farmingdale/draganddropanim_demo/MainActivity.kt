@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
 // ToDo 1: DONE Analyze the requirements for Individual Project 3
 // ToDo 2: DONE Show the DragAndDropBoxes composable
 // ToDo 3: DONE Change the circle to a rect
-// ToDo 4: Replace the command right with a image or icon
+// ToDo 4: DONE Replace the command right with a image or icon
 // ToDo 5: Make this works in landscape mode only
 // ToDo 6: Rotate the rect around itself
 // ToDo 7: Move - translate the rect horizontally and vertically
