@@ -50,6 +50,8 @@ import androidx.compose.ui.draganddrop.DragAndDropTransferData
 import androidx.compose.ui.draganddrop.mimeTypes
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -151,12 +153,16 @@ fun DragAndDropBoxes(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(0.8f)
-                .background(Color.Red)
+                .background(Color.Red),
+
+                contentAlignment = Alignment.TopStart
         ) {
             Box(
                 modifier = Modifier
                     .padding(10.dp)
                     .offset(pOffset.x.dp, pOffset.y.dp)
+                    .rotate(rtatView)
+
                     .size(25.dp, 25.dp)
                     .background(Color.Blue)
             )
