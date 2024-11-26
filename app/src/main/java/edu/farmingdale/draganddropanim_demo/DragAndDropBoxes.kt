@@ -20,7 +20,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.draganddrop.dragAndDropSource
 import androidx.compose.foundation.draganddrop.dragAndDropTarget
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -63,6 +66,10 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun DragAndDropBoxes(modifier: Modifier = Modifier) {
     var isPlaying by remember { mutableStateOf(true) }
+
+    var offsetX by remember { mutableStateOf(0f) }
+    var offsetY by remember { mutableStateOf(0f) }
+
     Column(modifier = Modifier.fillMaxSize()) {
 
         Row(
@@ -160,11 +167,24 @@ fun DragAndDropBoxes(modifier: Modifier = Modifier) {
             Box(
                 modifier = Modifier
                     .padding(10.dp)
-                    .offset(pOffset.x.dp, pOffset.y.dp)
+                    .offset {IntOffset(offsetX.toInt(), offsetY.toInt())}
                     .rotate(rtatView)
 
                     .size(25.dp, 25.dp)
                     .background(Color.Blue)
+
+                    .draggable(
+                        orientation = Orientation.Horizontal,
+                        state = rememberDraggableState { delta ->
+                            offsetX += delta
+                        }
+                    )
+                    .draggable(
+                        orientation = Orientation.Vertical,
+                        state = rememberDraggableState { delta ->
+                            offsetY += delta
+                        }
+                    )
             )
         }
     }
