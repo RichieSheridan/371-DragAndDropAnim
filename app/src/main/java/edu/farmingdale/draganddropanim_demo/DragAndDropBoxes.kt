@@ -37,6 +37,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Face
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -138,6 +139,21 @@ fun DragAndDropBoxes(modifier: Modifier = Modifier) {
             }
         }
 
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            Button(
+                onClick = {
+                    offsetX = 0f
+                    offsetY = 0f
+                },
+                modifier = Modifier.padding(0.5.dp)
+            ) {
+                Text("Reset Position")
+            }
+        }
 
         val pOffset by animateIntOffsetAsState(
             targetValue = when (isPlaying) {
