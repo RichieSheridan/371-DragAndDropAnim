@@ -71,6 +71,8 @@ fun DragAndDropBoxes(modifier: Modifier = Modifier) {
     var offsetX by remember { mutableStateOf(0f) }
     var offsetY by remember { mutableStateOf(0f) }
 
+    var isDragging by remember { mutableStateOf(false) }
+
     Column(modifier = Modifier.fillMaxSize()) {
 
         Row(
@@ -172,6 +174,12 @@ fun DragAndDropBoxes(modifier: Modifier = Modifier) {
                 repeatMode = RepeatMode.Restart
             )
         )
+
+        val squareSize by animateFloatAsState(
+            targetValue = if (isDragging) 35f else 25f,
+            animationSpec = tween(durationMillis = 300)
+        )
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -185,21 +193,23 @@ fun DragAndDropBoxes(modifier: Modifier = Modifier) {
                     .padding(10.dp)
                     .offset {IntOffset(offsetX.toInt(), offsetY.toInt())}
                     .rotate(rtatView)
-
-                    .size(25.dp, 25.dp)
+                    .size(squareSize.dp)
                     .background(Color.Blue)
-
                     .draggable(
                         orientation = Orientation.Horizontal,
                         state = rememberDraggableState { delta ->
                             offsetX += delta
-                        }
+                            isDragging = true
+                        },
+                        onDragStopped = { isDragging = false }
                     )
                     .draggable(
                         orientation = Orientation.Vertical,
                         state = rememberDraggableState { delta ->
                             offsetY += delta
-                        }
+                            isDragging = true
+                        },
+                        onDragStopped = { isDragging = false }
                     )
             )
         }
